@@ -11,5 +11,11 @@ RSpec.describe Calculator do
     it "allow new lines between numbers" do 
       expect(Calculator.new.add("1\n2,3")).to eq(6)
     end
+
+    it "throws error when input has negative numbers" do 
+      expect { Calculator.new.add("1,-1,2") }.to raise_error(an_instance_of(NegativeArgument).and having_attributes(message: "You cant have negative numbers in input: -1"))
+
+      expect { Calculator.new.add("1,-1,-2") }.to raise_error(an_instance_of(NegativeArgument).and having_attributes(message: "You cant have negative numbers in input: -1,-2"))
+    end
   end
 end
