@@ -22,9 +22,19 @@ end
 class ArgumentParser
   class << self
     def parser(args)
-      args.split(',').map do |arg|
+      delimiter = find_delimiter(args)
+
+      args = args.gsub("//#{delimiter}\n", '')
+
+      args.split(delimiter).map do |arg|
         Parser.new(arg).handler
       end.flatten
+    end
+
+    def find_delimiter(args)
+       regex = "//([^/\n]+)\n"
+
+       args.match(regex)[1]
     end
   end
 end
