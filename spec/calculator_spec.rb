@@ -32,11 +32,15 @@ RSpec.describe Calculator do
     end
 
     it "handle bigger strings" do
-      expect(Calculator.new.add("//;\n1;2;3;;4")).to eq(10)
+      expect(Calculator.new.add("//$\n1;2;3;;4;5;6;7;8;94;2;4;56;67;8;8;;3;2;4;67;8;545")).to eq(904)
     end
 
     it "handle if delimiter mismtach happens" do
       expect(Calculator.new.add("//$\n1;2;3;;4")).to eq(10)
+    end
+
+    it "should handle decimal numbers as well" do 
+      expect(Calculator.new.add("//$\n1;2;3;;4.5")).to eq(10.5)
     end
   end
 end
