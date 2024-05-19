@@ -20,6 +20,8 @@ class Parser
 end
 
 class ArgumentParser
+  DEFAULT_DELIMITER = ';'
+
   class << self
     def parser(args)
       delimiter = find_delimiter(args)
@@ -32,9 +34,11 @@ class ArgumentParser
     end
 
     def find_delimiter(args)
-       regex = "//([^/\n]+)\n"
-
-       args.match(regex)[1]
+      regex = "//([^/\n]+)\n"
+      matches = args.match(regex)
+      return DEFAULT_DELIMITER if matches.nil?
+      
+      args.match(regex)[1]
     end
   end
 end
